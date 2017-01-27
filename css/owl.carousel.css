@@ -1,71 +1,52 @@
-/* 
- * 	Core Owl Carousel CSS File
- *	v1.3.2
- */
-
-/* clearfix */
-.owl-carousel .owl-wrapper:after {
-	content: ".";
-	display: block;
-	clear: both;
-	visibility: hidden;
-	line-height: 0;
-	height: 0;
+#owl {
+  z-index: 1;
+  position: relative;
+  margin: 0 -114px 7px;
+  padding: 0 99px;
 }
-/* display none until init */
-.owl-carousel{
-	display: none;
-	position: relative;
-	width: 100%;
-	-ms-touch-action: pan-y;
+.owl-item {
+  float: left;
+  color: #ffd6d8;
 }
-.owl-carousel .owl-wrapper{
-	display: none;
-	position: relative;
-	-webkit-transform: translate3d(0px, 0px, 0px);
+#owl .item {
+  overflow: hidden;
+  padding: 0 15px;
 }
-.owl-carousel .owl-wrapper-outer{
-	overflow: hidden;
-	position: relative;
-	width: 100%;
+#owl .owl-wrapper-outer {
+  overflow: hidden;
 }
-.owl-carousel .owl-wrapper-outer.autoHeight{
-	-webkit-transition: height 500ms ease-in-out;
-	-moz-transition: height 500ms ease-in-out;
-	-ms-transition: height 500ms ease-in-out;
-	-o-transition: height 500ms ease-in-out;
-	transition: height 500ms ease-in-out;
+#owl .owl-prev,
+#owl .owl-next {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  width: 64px;
+  height: 64px;
+  font-size: 36px;
+  line-height: 66px;
+  left: 0;
+  top: 50%;
+  margin-top: -32px;
+  overflow: hidden;
+  border-radius: 500px;
+  background-color: #faf8f7;
+  color: #287e7d;
+  text-align: center;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
 }
-	
-.owl-carousel .owl-item{
-	float: left;
+#owl .owl-prev:hover,
+#owl .owl-next:hover {
+  background-color: #ffffff;
 }
-.owl-controls .owl-page,
-.owl-controls .owl-buttons div{
-	cursor: pointer;
+#owl .owl-next {
+  right: 0;
+  left: auto;
+  background-position: right -1px;
 }
-.owl-controls {
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+.owl-carousel .owl-wrapper {
+  display: none;
+  position: relative;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  -webkit-perspective: 1000;
 }
-
-/* mouse grab icon */
-.grabbing { 
-    cursor:url(grabbing.html) 8 8, move;
-}
-
-/* fix */
-.owl-carousel  .owl-wrapper,
-.owl-carousel  .owl-item{
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility:    hidden;
-	-ms-backface-visibility:     hidden;
-  -webkit-transform: translate3d(0,0,0);
-  -moz-transform: translate3d(0,0,0);
-  -ms-transform: translate3d(0,0,0);
-}
-
