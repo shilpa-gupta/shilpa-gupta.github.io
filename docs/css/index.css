@@ -2,7 +2,26 @@
     background-image: url("../images/grey_wash_wall_@2X.png");
 }
 
-td{
-    color: white;
-    align-content: center;
+/*td{*/
+    /*color: white;*/
+    /*align-content: center;*/
+/*}*/
+
+.alignment{
+    display: flex;
+    justify-content: center;
+}
+
+.homeicons{
+    border-radius: 40px;
+    padding: 20px;
+}
+
+.textalign{
+    display: inline-block;
+    text-align: center;
+    font-size: 100px;
+    color: azure;
+    margin-top: 170px;
+    font-family: "Tempus Sans ITC";
 }
