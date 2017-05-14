@@ -2,11 +2,6 @@
     background-image: url("../images/grey_wash_wall_@2X.png");
 }
 
-/*td{*/
-    /*color: white;*/
-    /*align-content: center;*/
-/*}*/
-
 .alignment{
     display: flex;
     justify-content: center;
