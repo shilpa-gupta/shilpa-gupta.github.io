@@ -332,6 +332,11 @@ header h1 {
   .cd-timeline-block:nth-child(even) .cd-timeline-content {
     float: right;
   }
+
+  .contact-me-icon{
+    width: 100px;
+    padding: 15px;
+  }
   .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
     top: 24px;
     left: auto;
