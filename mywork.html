@@ -67,6 +67,21 @@
             font-weight: 600;
             font-family: cursive;
         }
+        .github-button{
+            background-image: url(images/github-mark.png);
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            height: 36px;
+            width: 120px;
+            vertical-align: middle;
+            padding-left: 40px;
+            background-position: 8px 2px;
+            border: solid 1px;
+            background-color: white;
+            border-radius: 10px;
+            outline: none;
+        }
     </style>
     <title>Shilpa Gupta</title>
 </head>
@@ -81,28 +96,68 @@
     <div id="demo1" class="collapse collepse-div">
         <ul>
             <li>
-                <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <img src="images/nlp3.png">
+                <h3>Twitter User's Country Prediction</h3>
+                <p style="font-size: 16px">
+                    Worked with 2 others to predict country from which user belongs, based on his tweets, tried and tested various machine learning algorithms
+                    during the process.
+                </p>
+                <a href="" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/nlp5.png">
+                <h3>Quora Question pair duplicate detection</h3>
+                <p style="font-size: 16px">
+                    Project to detect if 2 questions sematically means the same thing. Based on Data set released by Quora
+                    <br> Tried 4-5 approaches from basic to deep learning BiDirectional LSTM.
+                </p>
+                <a href="https://github.com/shilpaUI/Quora-Question-Pair-Similarity" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/adverse.png">
+                <h3>Adverse drug interaction effect</h3>
+                <p style="font-size: 16px;">
+                    Building Automatic system to Detect if the symptoms described by the patients are due to the adverse reaction of the
+                    2 drugs which patient is already taking.
                 </p>
             </li>
             <li>
-                <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <img src="images/nlp7.jpg">
+                <h3>Word2Vec Implementation</h3>
+                <p style="font-size: 16px;">
+                   Single layer neural network implementation based on Cross Entropy and NCE for finding the best vector representation
+                    of the words.
                 </p>
+                <a href="https://github.com/shilpaUI/Word2vec-Implementation-deep-learning" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
             </li>
             <li>
-                <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <img src="images/nlp2.png">
+                <h3>Dependency parser - deep learning</h3>
+                <p style="font-size: 16px">
+                    Implementation of the Dependency parser as per the paper "A fast and accurate Dependency Parser using Neural Network" and different
+                    experiments with the approach in order to explore different setups with their effect on the accuracy.
                 </p>
+                <a href="https://github.com/shilpaUI/deep-learning-dependency-parser" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/nlp6.png">
+                <h3>Relation Extractor - deep learning</h3>
+                <p style="font-size: 16px">
+                    Performed different type of feature extraction tasks for the given training and test data in order
+                    to predict whether the given sentence contains "educated from" relation or not including feature
+                    extraction from the dependency parse tree of the sentence.
+                </p>
+                <a href="https://github.com/shilpaUI/Relation-Extraction-NLP" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
             </li>
         </ul>
     </div>
@@ -112,11 +167,36 @@
         <ul>
             <li>
                 <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <h3>Merge system call implementation</h3>
+                <p style="font-size: 16px">
+                    Implementation of merge system call which merge sort 2 sorted files and generated the
+                    output file.
                 </p>
+                <a href="https://github.com/shilpaUI/merge-system-call-implementation" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/mywork.jpg">
+                <h3>Stackable file system</h3>
+                <p style="font-size: 16px">
+                    Individually worked on developing a system to trace all user's operations on files, added via stackable filesystem,
+                    traces stored in non-readable repayable file, ioctl support to customize the system call listing to trace.
+                </p>
+                <a href="https://github.com/shilpaUI/FileSystem" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/mywork.jpg">
+                <h3>Custom System call Support</h3>
+                <p style="font-size: 16px">
+                    Worked with 2 others on developing framework in linux kernel to support custom implementation of system calls,
+                    a process can notify kernel to use default or custom system call vector
+                </p>
+                <a href="https://github.com/shilpaUI/custom-system-calls" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
             </li>
         </ul>
     </div>
@@ -126,11 +206,14 @@
         <ul>
             <li>
                 <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <h3>Yelp Data Analysis</h3>
+                <p style="font-size: 16px">
+                    Individual project on Developing Page Rank algorithm to find out most popular businesses.
+                    Used numpy, pandas, Ipython, Scipy, Scikit-learn, matplotlib
                 </p>
+                <a href="https://github.com/shilpaUI/yelp-data-page-rank" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
             </li>
         </ul>
     </div>
@@ -140,24 +223,59 @@
         <ul>
             <li>
                 <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <h3>This website</h3>
+                <p style="font-size: 16px">
+                    Designed and implemented this website.
                 </p>
+                <a href="https://github.com/shilpaUI/shilpaUI.github.io" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/mywork.jpg">
+                <h3>Immigration visualization</h3>
+                <p style="font-size: 16px">
+                    Visualization of how people immigrate across different countries in the world. Include interactive
+                    visualizations of the data from past 10 decades.
+                </p>
+                <a href="https://github.com/shilpaUI/Immigration_vis" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/mywork.jpg">
+                <h3>D3 Interactive plots</h3>
+                <p style="font-size: 16px">
+                    My first try to implement a interactive visualization in D3. Provide a dynamic bar chart and pie chart visualization
+                    of basket ball player data.
+                </p>
+                <a href="https://github.com/shilpaUI/D3-interactive-plots" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
+            </li>
+            <li>
+                <img src="images/mywork.jpg">
+                <h3>PCA, MDS visualization using D3</h3>
+                <p style="font-size: 16px">
+                    IMDB movie data analysis including dimension reduction from 10 to 2 using PCA and MDS. plotting
+                    dimensionally reduced data and analysing both the approaches.
+                </p>
+                <a href="https://github.com/shilpaUI/D3-PCA-MDS-and-more" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
             </li>
         </ul>
     </div>
     <button type="button" style="background-color: #F75C03" class="collapse-button" data-toggle="collapse" data-target="#demo5"><span class="subject-head">Human Computer Interaction/Hardware</span><br>
-    Arduino, laser cutting, 3D printing, electronics, image rendering</button>
+    Arduino, laser cutting, 3D printing, electronics, image rendering, grbl</button>
     <div id="demo5" class="collapse collepse-div">
         <ul>
             <li>
                 <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <h3>Built 3D Printed CNC Mill</h3>
+                <p style="font-size: 16px">
+                    As part of this project we built a CNC Mill. Used Laser cut and 3D printed parts. wired up
+                    the electronics and used grbl for software communication with the machine.
                 </p>
             </li>
         </ul>
@@ -168,11 +286,14 @@
         <ul>
             <li>
                 <img src="images/mywork.jpg">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <h3>Web Application Firewall</h3>
+                <p style="font-size: 16px">
+                    A reverse proxy based application which sits in front of web server and protect it from malicious requests by finding defined patterns
+                    in the requests as well as learning and blocking anomalies automatically.
                 </p>
+                <a href="https://github.com/shilpaUI/firewall-implementation-python" target="_blank">
+                <input type="button" value="GitHub" class="github-button"/>
+                </a>
             </li>
         </ul>
     </div>
