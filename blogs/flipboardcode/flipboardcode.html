@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>Flipboard coding challenge</h1>
+            <h4>Feb 5, 2017</h4>
+            <p>
+                Flipboard Challenge<br>
+                This is a challenge that requires you to construct a program that will complete a maze. Your program may access each step of the maze from a URL which returns information encoded in JSON format. This information includes the following:<br>
+                letter: the letter corresponding to this step within the maze<br>
+                adjacent: an array of objects encoding x and y coordinates for steps that are immediately adjacent to this step<br>
+                end: if the current step is the end, this value will be true. Otherwise it is false.<br>
+                The URL is located at /step and has the following parameters:<br>
+                x: the x coordinate of the step<br>
+                y: the y coordinate of the step<br>
+                s: the maze identifier, this parameter should be kept constant between step requests for the same maze<br>
+                /start will redirect your program to the (0, 0) coordinate of a new random maze.<br>
+                Your goal is to write a program that begins at the /start URL and traverse the maze until you reach the step where end is true. You should record each letter at each step in the path and print the resulting string at the end of your program.<br>
+                You may check your solution by calling /check with s set to the maze identifier and guess set to the string your program thinks is a potential solution.<br>
+                For example: pqkefzvymrbtfqntnqkrdipik is a solution for maze identifier 123456.5. The check endpoint returns a successful response for:/check?s=123456.5&guess=pqkefzvymrbtfqntnqkrdipik. Note that another, shorter solution is also possible for this identiferpqkefzvymrbtfqkrdik.<br>
+            </p>
+            <pre>
+                <code>
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+import com.google.gson.Gson;
+/**
+ * Created by shilpa on 2/5/2017.
+ */
+/*
+Class to store the verification result
+*/
+class VerificationResult{
+    boolean success;
+    public VerificationResult(boolean result){
+        this.success = result;
+    }
+}
+/*
+Class to represent x and y co-ordinates
+*/
+class Cordinates{
+    String x;
+    String y;
+    public Cordinates(String x, String y){
+        this.x = x;
+        this.y = y;
+    }
+}
+/*
+Class to represent a single response/step
+*/
+class Node{
+    char letter;
+    ArrayList<Cordinates> adjacent;
+    boolean end;
+    public Node(char c){
+        this.letter = c;
+        this.adjacent = new ArrayList<>();
+        this.end = false;
+    }
+}
+
+/*
+Class to represent a step Url
+*/
+class StepUrl{
+    String id;
+    String x;
+    String y;
+    String currPath;
+
+    public StepUrl(String id, String x, String y, String currPath){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.currPath = currPath;
+    }
+    /*
+    Overridding toString to get the url string fron the object
+    returns step Url
+    */
+    @Override
+    public String toString() {
+        return "https://challenge.flipboard.com/step?s=" + this.id + "&x=" + x + "&y=" + y;
+    }
+}
+
+/*
+Main Solution class
+*/
+public class FindMazePath {
+    /*
+    Start url to start navigation
+    */
+    String START_URL = "https://challenge.flipboard.com/start";
+
+    public static void main(String[] args) throws MalformedURLException, IOException{
+        FindMazePath maze = new FindMazePath();
+        HttpURLConnection connection = (HttpURLConnection)(new URL(maze.START_URL).openConnection());
+        connection.setInstanceFollowRedirects(false);
+        connection.connect();
+        String firstStep = connection.getHeaderField("Location").split("\\?")[1];
+/*
+Map to keep track of visited Nodes
+*/
+        HashMap<Character,ArrayList<ArrayList<Cordinates>>> visited = new HashMap<>();
+        HashMap<String,String> map = new HashMap<>();
+        String[] params = firstStep.split("&");
+        for(int i=0; i<params.length; i++){
+            String[] pair = params[i].split("=");
+            map.put(pair[0], pair[1]);
+        }
+        StepUrl start = new StepUrl(map.get("s"), map.get("x"), map.get("y"),"");
+        System.out.println("Maze id : " + map.get("s"));
+        String mazeID = map.get("s");
+/*
+Start of BFS Code
+*/
+        Queue<StepUrl> queue = new LinkedList<>();
+        queue.add(start);
+        while(!queue.isEmpty()){
+            StepUrl curr = queue.remove();
+            HttpURLConnection tempconnection = (HttpURLConnection)(new URL(curr.toString()).openConnection());
+            tempconnection.setRequestMethod("GET");
+            tempconnection.connect();
+            BufferedReader rd = new BufferedReader(new InputStreamReader(tempconnection.getInputStream()));
+            Gson gson = new Gson();
+            String result = rd.readLine();
+            Node node = gson.fromJson(result,Node.class);
+            if(node.end == true){
+                String res = curr.currPath + node.letter;
+                System.out.println("Guess : " + res);
+                System.out.println("Verifying the Guess...");
+                if(verify(mazeID,res)){
+                    System.out.println("Verified : Guess is Correct!!");
+                }else{
+                    System.out.println("Verified : Guess is Incorrect!!");
+                }
+                return;
+            }
+            if(!(visited.containsKey(node.letter) && listContains(visited.get(node.letter), node.adjacent))){
+                if(visited.containsKey(node.letter)){
+                    visited.get(node.letter).add(node.adjacent);
+                }else {
+                    ArrayList<ArrayList<Cordinates>> list = new ArrayList<>();
+                    list.add(node.adjacent);
+                    visited.put(node.letter, list);
+                }
+                for(Cordinates cordinates : node.adjacent){
+                    StepUrl next = new StepUrl(curr.id,cordinates.x,cordinates.y,curr.currPath+node.letter);
+                    queue.add(next);
+                }
+            }
+        }
+    }
+    /*
+    method to check if firstList contains secondList
+    */
+    public static boolean listContains(ArrayList<ArrayList<Cordinates>> firstList, ArrayList<Cordinates> secondList) {
+        for (ArrayList<Cordinates> list : firstList) {
+            if(sameList(list,secondList)){
+                return true;
+            }
+        }
+        return false;
+    }
+    /*
+    method to check if firstList and seconList are same
+    */
+    public static boolean sameList(ArrayList<Cordinates> firstList, ArrayList<Cordinates> secondList){
+        if (firstList.size() != secondList.size())
+            return false;
+        for (int i = 0; i < firstList.size(); i++) {
+            if (!(firstList.get(i).x.equals(secondList.get(i).x) && firstList.get(i).y.equals(secondList.get(i).y))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /*
+    Method to verify the guess
+    */
+    public static boolean verify(String mazeID, String result)throws MalformedURLException, IOException{
+        String CHECK_URL = "https://challenge.flipboard.com/check?s=" + mazeID + "&guess=" + result;
+        HttpURLConnection connection = (HttpURLConnection)(new URL(CHECK_URL).openConnection());
+        connection.setRequestMethod("GET");
+        connection.connect();
+        BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        Gson gson = new Gson();
+        String res = rd.readLine();
+        VerificationResult r = gson.fromJson(res,VerificationResult.class);
+        if(r.success == true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>

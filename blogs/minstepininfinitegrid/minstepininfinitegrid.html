@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>Min Steps in Infinite Grid</h1>
+            <h4>Feb 3, 2017</h4>
+            <p>
+                You are in an infinite 2D grid where you can move in any of the 8 directions :<br>
+                (x,y) to (x+1, y), (x - 1, y), (x, y+1), (x, y-1), (x-1, y-1), (x+1,y+1), (x-1,y+1), (x+1,y-1)<br>
+                You are given a sequence of points and the order in which you need to cover the points. Give the minimum number of steps in which you can achieve it. You start from the first point.<br>
+                Example :<br>
+                Input : [(0, 0), (1, 1), (1, 2)] Output : 2<br>
+                It takes 1 step to move from (0, 0) to (1, 1). It takes one more step to move from (1, 1) to (1, 2).<br>
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public int coverPoints(ArrayList&ltInteger&gt X, ArrayList&ltInteger&gt Y){
+        int points = X.size();
+        int totalsteps = 0;
+        for(int i=0; i&lt;points-1; i++){
+            totalsteps += stepsReq(X.get(i), Y.get(i), X.get(i+1), Y.get(i+1));
+        }
+        return totalsteps;
+    }
+
+    public int stepsReq(int x1, int y1, int x2, int y2){
+        int xSteps = Math.abs(x2-x1);
+        int ySteps = Math.abs(y2-y1);
+        return xSteps >= ySteps ? xSteps : ySteps;
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>

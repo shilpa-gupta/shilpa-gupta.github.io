@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>Add One To Number</h1>
+            <h4>Feb 3, 2017</h4>
+            <p>
+                Given a non-negative number represented as an array of digits,<br>
+                add 1 to the number ( increment the number represented by the digits ).<br>
+                The digits are stored such that the most significant digit is at the head of the list.<br>
+                Example:<br>
+                If the vector has [1, 2, 3]<br>
+                the returned vector should be [1, 2, 4]<br>
+                as 123 + 1 = 124.<br>
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public ArrayList<Integer> plusOne(ArrayList<Integer> a) {
+        int carry = 1;
+        int sum = 0;
+        int no = 0;
+        for(int i=a.size()-1; i>=0; i--){
+            sum = a.get(i) + carry;
+            no = sum%10;
+            carry = sum/10;
+            a.set(i,no);
+            if(carry == 0){
+                break;
+            }
+        }
+        if(carry != 0){
+            Collections.reverse(a);
+            a.add(carry);
+            Collections.reverse(a);
+        }else{
+            while (a.get(0) ==0 ){
+                a.remove(0);
+            }
+        }
+        return a;
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>
