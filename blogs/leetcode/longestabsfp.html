@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>G1 - Longest Absolute File Path</h1>
+            <h4>May 21, 2017</h4>
+            <p>
+                Suppose we abstract our file system by a string in the following manner:<br>
+
+                The string "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext" represents:<br>
+
+                dir<br>
+                &emsp;subdir1<br>
+                &emsp;subdir2<br>
+                &emsp;&emsp;file.ext<br>
+                The directory dir contains an empty sub-directory subdir1 and a sub-directory subdir2 containing a file file.ext.<br>
+
+                The string "dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext" represents:<br>
+
+                dir<br>
+                &emsp;subdir1<br>
+                &emsp;&emsp;file1.ext<br>
+                &emsp;subsubdir1<br>
+                &emsp;&emsp;subdir2<br>
+                &emsp;subsubdir2<br>
+                &emsp;&emsp;file2.ext<br>
+                The directory dir contains two sub-directories subdir1 and subdir2. subdir1 contains a file file1.ext and an empty second-level sub-directory subsubdir1. subdir2 contains a second-level sub-directory subsubdir2 containing a file file2.ext.<br>
+
+                We are interested in finding the longest (number of characters) absolute path to a file within our file system. For example, in the second example above, the longest absolute path is "dir/subdir2/subsubdir2/file2.ext", and its length is 32 (no<br>t including the double quotes).
+
+                Given a string representing the file system in the above format, return the length of the longest absolute path to file in the abstracted file system. If there is no file in the system, return 0.<br>
+
+                Note:<br>
+                The name of a file contains at least a . and an extension.<br>
+                The name of a directory or sub-directory will not contain a ..<br>
+                Time complexity required: O(n) where n is the size of the input string.<br>
+
+                Notice that a/aa/aaa/file1.txt is not the longest file path, if there is another path aaaaaaaaaaaaaaaaaaaaa/sth.png.<br>
+            </p>
+
+            <p>
+                Solution : <br>
+                1. split the string by "\n"<br>
+                2. iterate among the strings one by one and store it's path length in array, number of tabs in the line
+                defines the position where its path length will be stored.<br>
+                3. catch 1: include "/" in the max path length.
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public int lengthLongestPath(String input) {
+        if(input == null || input.length() == 0)
+            return 0;
+
+        String[] paths = input.split("\n");
+        int currLen = 0;
+        int maxLen = 0;
+        int[] pathlens = new int[paths.length+1];
+        for(String path : paths){
+            int tabs = path.lastIndexOf("\t")+1;
+            currLen = pathlens[tabs] + path.length() - tabs;
+            pathlens[tabs+1] = currLen + 1;
+            if(path.contains(".")){
+                maxLen = Math.max(currLen, maxLen);
+            }
+        }
+        return maxLen;
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>
