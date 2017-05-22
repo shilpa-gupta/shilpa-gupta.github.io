@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>G4 - Decode String</h1>
+            <h4>May 21, 2017</h4>
+            <p>
+                Given an encoded string, return it's decoded string.<br>
+
+                The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.<br>
+
+                You may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.<br>
+
+                Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there won't be input like 3a or 2[4].<br>
+
+                Examples:<br>
+                <br>
+                s = "3[a]2[bc]", return "aaabcbc".<br>
+                s = "3[a2[c]]", return "accaccacc".<br>
+                s = "2[abc]3[cd]ef", return "abcabccdcdcdef".<br>
+            </p>
+
+            <p>
+                Solution : <br>
+                take 2 stacks and 2 variables, numStack, resStack, num, res<br>
+                on normal char append it to res<br>
+                on normal number append it to the num, and push to the numStack<br>
+                on opening bracket push the res to the resStack, and make res = "" <br>
+                on closing bracket pop top num and str, start the result with str and append the res top num times, make it the res<br>
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public String decodeString(String s) {
+        if(s == null || s.length() == 0){
+            return "";
+        }
+
+        Stack<Integer> numStack = new Stack<Integer>();
+        Stack<String> resStack = new Stack<String>();
+        String res = "";
+        for(int i=0; i<s.length();){
+            if(Character.isDigit(s.charAt(i))){
+                int cnt = 0;
+                while(Character.isDigit(s.charAt(i))){
+                    cnt = cnt*10 + (s.charAt(i) - '0');
+                    i++;
+                }
+                numStack.push(cnt);
+            }else if(s.charAt(i) == '['){
+                resStack.push(res);
+                res = "";
+                i++;
+            }else if(s.charAt(i) == ']'){
+                int times = numStack.pop();
+                String temp = resStack.pop();
+                String tempres = temp;
+                for(int j=0; j<times; j++){
+                    tempres = tempres + res;
+                }
+                res = tempres;
+                i++;
+            }else{
+                res = res + s.charAt(i);
+                i++;
+            }
+        }
+        return res;
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>
