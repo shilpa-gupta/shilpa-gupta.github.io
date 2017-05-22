@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>G5 - Number of Islands</h1>
+            <h4>May 21, 2017</h4>
+            <p>
+                Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.<br>
+
+                Example 1:<br>
+
+                11110<br>
+                11010<br>
+                11000<br>
+                00000<br>
+                Answer: 1<br>
+
+                Example 2:<br>
+
+                11000<br>
+                11000<br>
+                00100<br>
+                00011<br>
+            </p>
+
+            <p>
+                Solution : <br>
+                pick one point and do dfs and mark visited all the points connected to it.
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        int row = grid.length;
+        if(row == 0)
+            return 0;
+        int col = grid[0].length;
+        boolean[][] visited = new boolean[row][col];
+        for(int i=0; i&lt;row; i++){
+            for(int j=0; j&lt;col; j++){
+                if(grid[i][j] == '1' && visited[i][j] == false){
+                    dfs(grid, i, j, row, col, visited);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public void dfs(char[][] grid, int i, int j, int row, int col, boolean[][] visited){
+        if(i < 0 || i >= row || j < 0 || j>= col){
+            return;
+        }else if(grid[i][j] == '1' && visited[i][j] == false){
+            visited[i][j] = true;
+            dfs(grid, i+1, j, row, col, visited);
+            dfs(grid, i-1, j, row, col, visited);
+            dfs(grid, i, j+1, row, col, visited);
+            dfs(grid, i, j-1, row, col, visited);
+        }
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>
