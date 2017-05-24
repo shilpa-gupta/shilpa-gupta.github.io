@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>G8 - Queue Reconstruction by Height</h1>
+            <h4>May 24, 2017</h4>
+            <p>
+                Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal to h. Write an algorithm to reconstruct the queue.<br>
+
+                Note:<br>
+                The number of people is less than 1,100.<br>
+
+                Example<br>
+
+                Input:<br>
+                [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]<br>
+
+                Output:<br>
+                [[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]<br>
+            </p>
+
+            <p>
+                Solution : <br>
+                Sort the array by decreasing order of heights and increasing order of taller people if heights are same.
+                iterate in the array and position each element at the index representated by taller people in front.
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        if(people == null || people.length == 0)
+            return new int[0][0];
+
+        Arrays.sort(people, new Comparator<int[]>(){
+            public int compare(int[] o1, int[] o2){
+                return o1[0] != o2[0] ? o2[0] - o1[0] : o1[1] - o2[1];
+            }
+            });
+
+            List<int[]> res = new LinkedList<>();
+            for(int[] cur : people){
+                res.add(cur[1], cur);
+            }
+            return res.toArray(new int[people.length][]);
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>
