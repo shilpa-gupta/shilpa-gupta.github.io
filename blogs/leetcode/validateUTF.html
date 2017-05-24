@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <link rel="icon" type="text/plain" href="../../images/tabicon.png">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .image:hover {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .image {
+            -webkit-transition: all 0.7s ease;
+            transition: all 0.7s ease;
+        }
+        .collepse-div{
+            margin: 15px;
+            background-color: white;
+            border-radius: 40px;
+            overflow: hidden;
+            width: 100%;
+            padding: 18px;
+        }
+
+        .collepse-div p{
+            font-size: 18px;
+        }
+        .collepse-div img{
+            padding: 25px;
+        }
+    </style>
+    <title>Shilpa Gupta</title>
+</head>
+<body>
+<a href="../../index.html">
+    <img class="homeicons image" src="../../images/home.png">
+</a>
+<section>
+    <div class="container">
+        <div id="demo1" class="collepse-div">
+            <h1>G6 - Validate UTF-8</h1>
+            <h4>May 24, 2017</h4>
+            <p>
+                A character in UTF8 can be from 1 to 4 bytes long, subjected to the following rules:<br>
+
+                For 1-byte character, the first bit is a 0, followed by its unicode code.<br>
+                For n-bytes character, the first n-bits are all one's, the n+1 bit is 0, followed by n-1 bytes with most significant 2 bits being 10.<br>
+                This is how the UTF-8 encoding would work:<br>
+
+                Char. number range  |        UTF-8 octet sequence<br>
+                (hexadecimal)    |              (binary)<br>
+                --------------------+---------------------------------------------<br>
+                0000 0000-0000 007F | 0xxxxxxx<br>
+                0000 0080-0000 07FF | 110xxxxx 10xxxxxx<br>
+                0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx<br>
+                0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx<br>
+                Given an array of integers representing the data, return whether it is a valid utf-8 encoding.<br>
+            </p>
+
+            <p>
+                Solution : <br>
+                Count number of bytes and validate one by one, check for corner cases like number of bytes 1 or more than 5.
+                to understand UTF-8 : https://www.youtube.com/watch?v=MijmeoH9LT4
+            </p>
+            <pre>
+                <code>
+public class Solution {
+    public boolean validUtf8(int[] data) {
+        if(data == null || data.length == 0){
+            return true;
+        }
+
+        int i = 0;
+        int len = data.length;
+        int noOfBytes = 0;
+        while(i < len){
+            noOfBytes = byteLength(data[i]);
+            if(noOfBytes == 1 || noOfBytes >= 5)
+                return false;
+            if(noOfBytes > 0)
+                noOfBytes--;
+            while(noOfBytes > 0){
+                i++;
+                if(i >= len){
+                    return false;
+                }
+                if(!isValidContinuation(data[i]))
+                    return false;
+                noOfBytes--;
+            }
+            i++;
+        }
+
+        if(noOfBytes > 0)
+            return false;
+        else
+            return true;
+    }
+
+    public int byteLength(int number){
+        int count = 0;
+        while(true){
+            if((number & 128) > 0){
+                count++;
+                number = number << 1;
+            }else{
+                break;
+            }
+        }
+        return count;
+    }
+
+    public boolean isValidContinuation(int number){
+        if(((number & 128) > 0) && ((number << 1) & 128) == 0)
+            return true;
+        else
+            return false;
+    }
+}
+                </code>
+            </pre>
+        </div>
+    </div>
+</section>
+</body>
+</html>
